@@ -1,0 +1,11 @@
+{
+	"configurations": [
+		{
+			"type": "java",
+			"name": "CodeLens (Launch) - DivMul",
+			"request": "launch",
+			"mainClass": "app.DivMul",
+			"projectName": "Mission_1"
+		}
+	]
+}

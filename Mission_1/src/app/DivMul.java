@@ -1,9 +1,27 @@
 package app;
 
 import java.util.Random;
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 public class DivMul {
+	//---------------------------------------------------------------------------------
+	//                                Divide And Multiply
+	//                                -------------------
+	//
+	// General : Gives the user to solve simple mathematical exercises.
+	//
+	// Input   : The answer of the exercise from the user.
+	//
+	// Process : Produce two random numbers and a mathematical operation,
+	//           gives the user to answer the exercise, and check the answer.
+	//
+	// Output  : Whether or not the answer is true.
+	//
+	//---------------------------------------------------------------------------------
+	// Programmer : Dvir Twito
+	// Student No : 324270883
+	// Date       : 07.09.2019
+	//---------------------------------------------------------------------------------
 	public static void main(String[] args) {
 		int totalCounter = 0;
 		int winningCounter = 0;
@@ -19,19 +37,26 @@ public class DivMul {
 			} else {
 				firstNumber = rnd.nextInt(100);
 				secondNumber = rnd.nextInt(9) + 1;
-				firstNumber += howMuchToAdd(firstNumber, secondNumber);
+				firstNumber -= firstNumber % secondNumber;
 			}
 			String expression = createExpression(firstNumber, operator, secondNumber);
 			userAnswer = JOptionPane.showInputDialog(expression);
 			if (userAnswer != null && !userAnswer.isEmpty()) {
-				int intUserAnswer = Integer.parseInt(userAnswer);
-				int realAnswer = calculate(firstNumber, operator, secondNumber);
-				if (intUserAnswer == realAnswer) {
-					winningCounter++;
-					JOptionPane.showMessageDialog(null, "You are right!!");
-				} else
-					JOptionPane.showMessageDialog(null, String.format("You are wrong, the answer is %d", realAnswer));
-				totalCounter++;
+				while (!(userAnswer == null || userAnswer.isEmpty() || isNumber(userAnswer))) {
+					JOptionPane.showMessageDialog(null, "You must to enter a number");
+					userAnswer = JOptionPane.showInputDialog(expression);
+				}
+				if (userAnswer != null && !userAnswer.isEmpty()) {
+					int intUserAnswer = Integer.parseInt(userAnswer);
+					int realAnswer = calculate(firstNumber, operator, secondNumber);
+					if (intUserAnswer == realAnswer) {
+						winningCounter++;
+						JOptionPane.showMessageDialog(null, "You are right!!!");
+					} else
+						JOptionPane.showMessageDialog(null,
+								String.format("You are wrong, the answer is %d", realAnswer));
+					totalCounter++;
+				}
 			}
 		}
 
@@ -57,11 +82,12 @@ public class DivMul {
 		return String.format("%d %c %d", firstNumber, operator, secondNumber);
 	}
 
-	private static int howMuchToAdd(int firstNumber, int secondNumber) {
-		int remainder = firstNumber % secondNumber;
-		if (firstNumber % (secondNumber + remainder) == 0)
-			return remainder;
-		else
-			return -remainder;
+	private static Boolean isNumber(String str) {
+		try {
+			Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 }

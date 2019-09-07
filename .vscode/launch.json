@@ -4,6 +4,13 @@
 			"type": "java",
 			"name": "CodeLens (Launch) - DivMul",
 			"request": "launch",
+			"mainClass": "app.DivMul",
+			"projectName": "Mission_1"
+		},
+		{
+			"type": "java",
+			"name": "CodeLens (Launch) - DivMul",
+			"request": "launch",
 			"mainClass": "DivMul"
 		}
 	]

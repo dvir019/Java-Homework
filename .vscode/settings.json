@@ -4,5 +4,6 @@
 		"**/*.class": true,
 		"**/*.gitignore": true,
 		"README.md": true
-	}
+	},
+	"editor.formatOnType": true
 }

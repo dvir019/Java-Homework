@@ -4,24 +4,24 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class DivMul {
-	//---------------------------------------------------------------------------------
-	//                                Divide And Multiply
-	//                                -------------------
+	// ---------------------------------------------------------------------------------
+	// Divide And Multiply
+	// -------------------
 	//
 	// General : Gives the user to solve simple mathematical exercises.
 	//
-	// Input   : The answer of the exercise from the user.
+	// Input : The answer of the exercise from the user.
 	//
 	// Process : Produce two random numbers and a mathematical operation,
-	//           gives the user to answer the exercise, and check the answer.
+	// gives the user to answer the exercise, and check the answer.
 	//
-	// Output  : Whether or not the answer is true.
+	// Output : Whether or not the answer is true.
 	//
-	//---------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------
 	// Programmer : Dvir Twito
 	// Student No : 324270883
-	// Date       : 07.09.2019
-	//---------------------------------------------------------------------------------
+	// Date : 07.09.2019
+	// ---------------------------------------------------------------------------------
 	public static void main(String[] args) {
 		int totalCounter = 0;
 		int winningCounter = 0;
@@ -51,10 +51,12 @@ public class DivMul {
 					int realAnswer = calculate(firstNumber, operator, secondNumber);
 					if (intUserAnswer == realAnswer) {
 						winningCounter++;
-						JOptionPane.showMessageDialog(null, "You are right!!!");
-					} else
+						System.out.println("Correct");
+					} else {
+						System.out.println("Wrong");
 						JOptionPane.showMessageDialog(null,
-								String.format("You are wrong, the answer is %d", realAnswer));
+								String.format("You are wrong, %s = %d", expression, realAnswer));
+					}
 					totalCounter++;
 				}
 			}

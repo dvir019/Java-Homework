@@ -2,6 +2,13 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "CodeLens (Launch) - Matrix",
+			"request": "launch",
+			"mainClass": "app.Matrix",
+			"projectName": "Mission_2"
+		},
+		{
+			"type": "java",
 			"name": "CodeLens (Launch) - GameOfLife",
 			"request": "launch",
 			"mainClass": "app.GameOfLife",

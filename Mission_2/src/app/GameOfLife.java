@@ -369,7 +369,6 @@ public class GameOfLife extends JApplet implements ActionListener {
 				int number = Integer.parseInt(numberStr);
 				if (number > 0)
 					return number;
-				// throw new NumberFormatException();
 			} catch (NumberFormatException ex) {
 				if (numberStr == null) {
 					return -1;

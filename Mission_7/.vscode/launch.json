@@ -1,0 +1,18 @@
+{
+	"configurations": [
+		{
+			"type": "java",
+			"name": "CodeLens (Launch) - ExtendedTime",
+			"request": "launch",
+			"mainClass": "app.ExtendedTime",
+			"projectName": "Mission_7"
+		},
+		{
+			"type": "java",
+			"name": "CodeLens (Launch) - SimpleTime",
+			"request": "launch",
+			"mainClass": "app.SimpleTime",
+			"projectName": "Mission_7"
+		}
+	]
+}

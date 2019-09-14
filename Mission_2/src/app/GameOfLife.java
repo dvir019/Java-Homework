@@ -248,11 +248,7 @@ public class GameOfLife extends JApplet implements ActionListener {
 		}
 		matrix = new boolean[rows][columns];
 		tempMatrix = new boolean[rows][columns];
-		/*
-		 * matrix[13][14] = true; matrix[14][13] = true; matrix[14][14] = true;
-		 * matrix[14][15] = true; matrix[15][13] = true; matrix[15][15] = true;
-		 * matrix[16][14] = true;
-		 */
+
 		randomiseMatrix();
 		displayLife();
 		setLabelText();
@@ -288,7 +284,7 @@ public class GameOfLife extends JApplet implements ActionListener {
 				showByeBye();
 			}
 		}
-
+		setSize(500, 500);
 	}
 
 	public boolean generateNextGeneration() {

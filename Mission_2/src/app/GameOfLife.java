@@ -1,6 +1,11 @@
 package app;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
@@ -32,23 +37,29 @@ public class GameOfLife extends JApplet implements ActionListener {
 		c.add(displayBoard, BorderLayout.CENTER);
 		c.add(nextGeneration, BorderLayout.SOUTH);
 
-		rows = 30;
-		columns = 30;
+		rows = getANumber();
+		if (rows == -1) {
+			showByeBye();
+			return;
+		}
+		columns = getANumber();
+		if (columns == -1) {
+			showByeBye();
+			return;
+		}
 		matrix = new boolean[rows][columns];
 		tempMatrix = new boolean[rows][columns];
-		
-		matrix[13][14] = true;
-		matrix[14][13]=true;
-		matrix[14][14]=true;
-		matrix[14][15]=true;
-		matrix[15][13]=true;
-		matrix[15][15]=true;
-		matrix[16][14]=true;
-		
+		/*
+		 * matrix[13][14] = true; matrix[14][13] = true; matrix[14][14] = true;
+		 * matrix[14][15] = true; matrix[15][13] = true; matrix[15][15] = true;
+		 * matrix[16][14] = true;
+		 */
+		randomiseMatrix();
 		displayLife();
 	}
 
 	public void displayLife() {
+
 		String str = "";
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
@@ -62,12 +73,28 @@ public class GameOfLife extends JApplet implements ActionListener {
 			str += "\n";
 		}
 		displayBoard.setText(str);
+
+		/*
+		 * displayBoard.setText(""); for (int i = 0; i < rows; i++) { for (int j = 0; j
+		 * < columns; j++) { if (matrix[i][j]) addColoredText("+", Color.GREEN); else
+		 * addColoredText("-", Color.RED); if (j < columns - 1) addColoredText(" ",
+		 * Color.BLACK); } addColoredText("\n", Color.BLACK); }
+		 */
 	}
 
 	// implementation of ActionListener interface
 	public void actionPerformed(ActionEvent e) {
-		generateNextGeneration();
-		displayLife();
+		if (generateNextGeneration()) {
+			displayLife();
+		} else {
+			if (askStartOver()) {
+				randomiseMatrix();
+				displayLife();
+			} else {
+				showByeBye();
+			}
+		}
+
 	}
 
 	public boolean generateNextGeneration() {
@@ -126,5 +153,52 @@ public class GameOfLife extends JApplet implements ActionListener {
 		boolean[][] temp = matrix;
 		matrix = tempMatrix;
 		tempMatrix = temp;
+	}
+
+	private boolean askStartOver() {
+		int result = JOptionPane.showConfirmDialog(null,
+				"The bacteria population stabilized.\nDo you want to start over?", "", JOptionPane.YES_NO_OPTION);
+
+		if (result == JOptionPane.YES_OPTION) {
+			return true;
+		}
+		return false;
+	}
+
+	private int getANumber() {
+		boolean isNumberOK = false;
+		String numberStr = JOptionPane.showInputDialog("Enter a positive whole number");
+		while (!isNumberOK) {
+			try {
+				int number = Integer.parseInt(numberStr);
+				if (number > 0)
+					return number;
+				// throw new NumberFormatException();
+			} catch (NumberFormatException ex) {
+				if (numberStr == null) {
+					return -1;
+				}
+			}
+			numberStr = JOptionPane.showInputDialog("The number is not valid, enter a new one");
+		}
+		return -1;
+
+	}
+
+	private void showByeBye() {
+		c.remove(nextGeneration);
+		displayBoard.setFont(new Font("monospaced", Font.BOLD, 26));
+		displayBoard.setText("Bye Bye");
+	}
+
+	private void addColoredText(String text, Color color) {
+		/*
+		 * StyledDocument doc = displayBoard.getStyledDocument(); Style style =
+		 * displayBoard.addStyle("I'm a Style", null);
+		 * StyleConstants.setForeground(style, color);
+		 * 
+		 * try { doc.insertString(doc.getLength(), text,style); } catch
+		 * (BadLocationException e){}
+		 */
 	}
 }

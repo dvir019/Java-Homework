@@ -6,8 +6,13 @@ public class Shelf {
 	private int shelfNumber;
 	private ArrayList<Book> books;
 
+	// Max values
+	private static final int BOOKS_MAX = 5;
+	private static final int PAGES_MAX = 1500;
+
 	// Min values
 	private static final int SHELF_NUMBER_MIN = 0;
+	private static final int BOOKS_MIN = 0;
 
 	// Default values
 	private static final int SHELF_NUMBER_DEFAULT = 0;
@@ -48,5 +53,36 @@ public class Shelf {
 			pagesCounter += book.getPages();
 		}
 		return pagesCounter;
+	}
+
+	public boolean addBook(Book book) {
+		if (getNumberOfBooks() < BOOKS_MAX && getNumberOfPages() < PAGES_MAX) {
+			books.add(book);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean removeBook(int bookIndex) {
+		if (bookIndex > 0 && bookIndex <= getNumberOfBooks()) {
+			books.remove(bookIndex - 1);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isEmpty() {
+		return getNumberOfBooks() == 0;
+	}
+
+	@Override
+	public String toString() {
+		if (isEmpty())
+			return ("");
+		String str = String.format("The books on the shelf number $d are:\n", shelfNumber);
+		for (Book book : books) {
+			str = str + "\t" + book.toString() + "\n";
+		}
+		return (str);
 	}
 }

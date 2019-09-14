@@ -1,0 +1,11 @@
+{
+	"configurations": [
+		{
+			"type": "java",
+			"name": "CodeLens (Launch) - TestLibrary",
+			"request": "launch",
+			"mainClass": "app.TestLibrary",
+			"projectName": "Mission_5"
+		}
+	]
+}

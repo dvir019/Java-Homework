@@ -96,11 +96,11 @@ public class Shelf {
 	@Override
 	public String toString() {
 		if (isEmpty())
-			return (EMPTY_SHELF_DEFAULT);
+			return EMPTY_SHELF_DEFAULT;
 		String str = String.format("The books on the shelf number $d are:\n", shelfNumber);
 		for (Book book : books) {
 			str = str + "\t" + book.toString() + "\n";
 		}
-		return (str);
+		return str;
 	}
 }

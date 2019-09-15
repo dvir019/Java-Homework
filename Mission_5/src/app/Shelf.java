@@ -3,6 +3,7 @@ package app;
 import java.util.ArrayList;
 
 public class Shelf {
+	// TODO - check if ArrayList<Book> is fine
 	private int shelfNumber;
 	private ArrayList<Book> books;
 
@@ -16,6 +17,7 @@ public class Shelf {
 
 	// Default values
 	private static final int SHELF_NUMBER_DEFAULT = 0;
+	private static final String EMPTY_SHELF_DEFAULT = "";
 
 	public Shelf(int shelfNumber) {
 		init();
@@ -39,7 +41,7 @@ public class Shelf {
 		}
 	}
 
-	public void init() {
+	private void init() {
 		books = new ArrayList<Book>();
 	}
 
@@ -75,10 +77,26 @@ public class Shelf {
 		return getNumberOfBooks() == 0;
 	}
 
+	public void print(boolean extended) {
+		if (extended) {
+			System.out.println(extendedToString());
+		} else {
+			System.out.println(toString());
+		}
+	}
+
+	public String extendedToString() {
+		String str = toString();
+		if (str.equals(EMPTY_SHELF_DEFAULT)) {
+			return String.format("Shelf number %d is empty.", shelfNumber);
+		}
+		return str;
+	}
+
 	@Override
 	public String toString() {
 		if (isEmpty())
-			return ("");
+			return (EMPTY_SHELF_DEFAULT);
 		String str = String.format("The books on the shelf number $d are:\n", shelfNumber);
 		for (Book book : books) {
 			str = str + "\t" + book.toString() + "\n";

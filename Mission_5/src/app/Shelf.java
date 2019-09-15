@@ -58,16 +58,16 @@ public class Shelf {
 	}
 
 	public boolean addBook(Book book) {
-		if (getNumberOfBooks() < BOOKS_MAX && getNumberOfPages() < PAGES_MAX) {
+		if (getNumberOfBooks() < BOOKS_MAX && getNumberOfPages() + book.getPages() < PAGES_MAX) {
 			books.add(book);
 			return true;
 		}
 		return false;
 	}
 
-	public boolean removeBook(int bookIndex) {
-		if (bookIndex > 0 && bookIndex <= getNumberOfBooks()) {
-			books.remove(bookIndex - 1);
+	public boolean removeBook(int bookNumber) {
+		if (bookNumber > 0 && bookNumber <= getNumberOfBooks()) {
+			books.remove(bookNumber - 1);
 			return true;
 		}
 		return false;
